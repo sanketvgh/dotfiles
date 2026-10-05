@@ -1,0 +1,109 @@
+[
+  {
+    "key": "ctrl+alt+e",
+    "command": "workbench.files.action.collapseExplorerFolders"
+  },
+  {
+    "key": "ctrl+alt+c",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.focusSecondEditorGroup",
+        {
+          "command": "vscode.setEditorLayout",
+          "args": { "orientation": 0, "groups": [{ "size": 0.7 }, { "size": 0.3 }] }
+        },
+        "workbench.action.focusSecondEditorGroup",
+        "workbench.action.unlockEditorGroup",
+        {
+          "command": "workbench.action.terminal.newWithProfile",
+          "args": { "profileName": "Claude", "location": "editor" }
+        },
+        "workbench.action.lockEditorGroup"
+      ]
+    }
+  },
+  {
+    "key": "ctrl+alt+x",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.focusSecondEditorGroup",
+        {
+          "command": "vscode.setEditorLayout",
+          "args": { "orientation": 0, "groups": [{ "size": 0.7 }, { "size": 0.3 }] }
+        },
+        "workbench.action.focusSecondEditorGroup",
+        "workbench.action.unlockEditorGroup",
+        {
+          "command": "workbench.action.terminal.newWithProfile",
+          "args": { "profileName": "Codex", "location": "editor" }
+        },
+        "workbench.action.lockEditorGroup"
+      ]
+    }
+  },
+  {
+    "key": "ctrl+alt+b",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.focusFirstEditorGroup",
+        "workbench.action.toggleMaximizeEditorGroup"
+      ]
+    }
+  },
+  {
+    "key": "ctrl+alt+f",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.focusSecondEditorGroup",
+        "workbench.action.toggleMaximizeEditorGroup"
+      ]
+    }
+  },
+  { "key": "ctrl+alt+w", "command": "gitlens.views.worktrees.focus" },
+  { "key": "ctrl+alt+s", "command": "workbench.action.toggleStatusbarVisibility" },
+  { "key": "ctrl+;", "command": "whichkey.show" },
+  {
+    "key": "ctrl+shift+alt+c",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.focusSecondEditorGroup",
+        {
+          "command": "vscode.setEditorLayout",
+          "args": { "orientation": 0, "groups": [{ "size": 0.7 }, { "size": 0.3 }] }
+        },
+        "workbench.action.focusSecondEditorGroup",
+        "workbench.action.unlockEditorGroup",
+        {
+          "command": "workbench.action.terminal.newWithProfile",
+          "args": { "profileName": "Claude · Continue", "location": "editor" }
+        },
+        "workbench.action.lockEditorGroup"
+      ]
+    }
+  },
+  {
+    "key": "ctrl+shift+alt+x",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.focusSecondEditorGroup",
+        {
+          "command": "vscode.setEditorLayout",
+          "args": { "orientation": 0, "groups": [{ "size": 0.7 }, { "size": 0.3 }] }
+        },
+        "workbench.action.focusSecondEditorGroup",
+        "workbench.action.unlockEditorGroup",
+        {
+          "command": "workbench.action.terminal.newWithProfile",
+          "args": { "profileName": "Codex · Continue", "location": "editor" }
+        },
+        "workbench.action.lockEditorGroup"
+      ]
+    }
+  }
+]

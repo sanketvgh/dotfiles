@@ -1,0 +1,652 @@
+{
+  // Appearance
+  "workbench.colorTheme": "Dark 2026",
+  "workbench.iconTheme": "symbols",
+  "editor.fontFamily": "'Cascadia Code', Consolas, monospace",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.65,
+  "editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss19', 'ss20'",
+  "editor.fontVariations": true,
+  "editor.fontWeight": "400",
+  "editor.tokenColorCustomizations": {
+    "[Dark 2026]": {
+      "textMateRules": [
+        {
+          "scope": ["comment", "comment.line", "comment.block", "punctuation.definition.comment"],
+          "settings": { "fontStyle": "italic" },
+        },
+      ],
+    },
+  },
+  "editor.padding.top": 16,
+  "editor.padding.bottom": 16,
+
+  // Quiet window chrome
+  "workbench.activityBar.location": "top",
+  "workbench.layoutControl.enabled": false,
+  "window.title": "${rootName}${separator}${activeRepositoryBranchName}${separator}${activeEditorShort}${dirty}",
+  "workbench.editor.showTabs": "multiple",
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 6,
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.editorAssociations": {
+    "*.md": "vscode.markdown.preview.editor",
+  },
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "workbench.tree.renderIndentGuides": "none",
+
+  // Quiet editor
+  "editor.minimap.enabled": false,
+  "editor.glyphMargin": true,
+  "editor.folding": true,
+  "editor.renderLineHighlight": "gutter",
+  "editor.overviewRulerBorder": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.scrollbar.verticalScrollbarSize": 6,
+  "editor.scrollbar.horizontalScrollbarSize": 6,
+  "editor.stickyScroll.enabled": false,
+  "editor.guides.indentation": false,
+  "editor.codeLens": false,
+  "editor.lightbulb.enabled": "off",
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "editor.matchBrackets": "never",
+  "editor.occurrencesHighlight": "off",
+  "editor.renderWhitespace": "none",
+  "editor.wordWrap": "on",
+
+  // Calm motion
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+
+  // Terminal
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.lineHeight": 1.25,
+  "terminal.integrated.fontFamily": "'Cascadia Code NF', 'Cascadia Code', monospace",
+  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.fontLigatures.featureSettings": "\"calt\" on, \"liga\" on, \"ss01\" on, \"ss19\" on",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorStyleInactive": "outline",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.initialHint": false,
+  "terminal.integrated.stickyScroll.enabled": false,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.suggest.enabled": false,
+  "terminal.integrated.tabs.hideCondition": "singleTerminal",
+  "terminal.integrated.commandsToSkipShell": [
+    "runCommands",
+    "gitlens.views.worktrees.focus",
+    "workbench.action.toggleStatusbarVisibility",
+    "whichkey.show",
+  ],
+{{ includeTemplate "vscode/zen/terminal-profiles" . }}
+
+  // Zen Mode (Ctrl+K Z)
+  "zenMode.centerLayout": true,
+  "zenMode.fullScreen": false,
+  "zenMode.hideLineNumbers": true,
+  "zenMode.showTabs": "none",
+  "zenMode.silentNotifications": true,
+  "zenMode.restore": true,
+
+  // Formatting
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+  },
+  "oxc.enable.oxfmt": true,
+  "oxc.path.oxfmt": {{ includeTemplate "vscode/oxfmt-path" . }},
+  "oxc.requireConfig": true,
+  // Oxc README: run formatting as a code action so it happens before lint fixes
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.format.oxc": "explicit",
+      "source.fixAll.oxc": "explicit",
+      "source.fixAll.eslint": "explicit",
+    },
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.insertSpaces": false,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+    },
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+  },
+
+  // Behaviour
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "git.autofetch": true,
+  "git.detectWorktrees": true,
+  "workbench.externalBrowser": "chrome",
+  "chat.disableAIFeatures": true,
+  "git.blame.editorDecoration.enabled": false,
+
+  // Markdown preview
+  // fontFamily and lineHeight are overridden by github-markdown.css from
+  // lzm0x219.vscode-github-markdown; they apply again if that extension is removed.
+  "markdown.preview.fontFamily": "Inter, 'Segoe UI', system-ui, sans-serif",
+  "markdown.preview.fontSize": 14,
+  "markdown.preview.lineHeight": 2,
+  "githubMarkdown.theme.mode": "vscode",
+
+  // Markdown lint
+  "markdownlint.configFile": "${userHome}/.markdownlint.json",
+  "[markdown]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit",
+    },
+  },
+
+  // Error Lens
+  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+  "errorLens.messageBackgroundMode": "message",
+  "errorLens.fontStyleItalic": true,
+  "errorLens.messageMaxChars": 120,
+  "errorLens.margin": "2ch",
+  "errorLens.delay": 500,
+  "errorLens.gutterIconsEnabled": true,
+  "errorLens.gutterIconSet": "circle",
+
+  // Which Key (leader: ctrl+;)
+  "whichkey.bindings": [
+    {
+      "key": " ",
+      "name": "Command palette",
+      "type": "command",
+      "command": "workbench.action.showCommands",
+    },
+    {
+      "key": "a",
+      "name": "+Agents",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "c",
+          "name": "Claude",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Claude",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "C",
+          "name": "Claude · Continue",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Claude · Continue",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "r",
+          "name": "Claude · Resume",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Claude · Resume",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "p",
+          "name": "Claude · Plan",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Claude · Plan",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "w",
+          "name": "Claude · Worktree",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Claude · Worktree",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "x",
+          "name": "Codex",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Codex",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "X",
+          "name": "Codex · Continue",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Codex · Continue",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "R",
+          "name": "Codex · Resume",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Codex · Resume",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "W",
+          "name": "Codex · Worktree",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Codex · Worktree",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "s",
+          "name": "Shell",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              {
+                "command": "vscode.setEditorLayout",
+                "args": {
+                  "orientation": 0,
+                  "groups": [
+                    {
+                      "size": 0.7,
+                    },
+                    {
+                      "size": 0.3,
+                    },
+                  ],
+                },
+              },
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.unlockEditorGroup",
+              {
+                "command": "workbench.action.terminal.newWithProfile",
+                "args": {
+                  "profileName": "Shell",
+                  "location": "editor",
+                },
+              },
+              "workbench.action.lockEditorGroup",
+            ],
+          },
+        },
+      ],
+    },
+    {
+      "key": "l",
+      "name": "+Layout",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "h",
+          "name": "Hide / show agents",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusFirstEditorGroup",
+              "workbench.action.toggleMaximizeEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "f",
+          "name": "Agents full width",
+          "type": "command",
+          "command": "runCommands",
+          "args": {
+            "commands": [
+              "workbench.action.focusSecondEditorGroup",
+              "workbench.action.toggleMaximizeEditorGroup",
+            ],
+          },
+        },
+        {
+          "key": "b",
+          "name": "Toggle sidebar",
+          "type": "command",
+          "command": "workbench.action.toggleSidebarVisibility",
+        },
+        {
+          "key": "p",
+          "name": "Toggle panel",
+          "type": "command",
+          "command": "workbench.action.togglePanel",
+        },
+        {
+          "key": "s",
+          "name": "Toggle status bar",
+          "type": "command",
+          "command": "workbench.action.toggleStatusbarVisibility",
+        },
+        {
+          "key": "z",
+          "name": "Zen mode",
+          "type": "command",
+          "command": "workbench.action.toggleZenMode",
+        },
+        {
+          "key": "e",
+          "name": "Collapse explorer folders",
+          "type": "command",
+          "command": "workbench.files.action.collapseExplorerFolders",
+        },
+      ],
+    },
+    {
+      "key": "g",
+      "name": "+Git",
+      "type": "bindings",
+      "bindings": [
+        {
+          "key": "g",
+          "name": "Source control",
+          "type": "command",
+          "command": "workbench.view.scm",
+        },
+        {
+          "key": "d",
+          "name": "Diff current file",
+          "type": "command",
+          "command": "git.openChange",
+        },
+        {
+          "key": "a",
+          "name": "All changes",
+          "type": "command",
+          "command": "git.viewChanges",
+        },
+        {
+          "key": "h",
+          "name": "File history",
+          "type": "command",
+          "command": "timeline.focus",
+        },
+        {
+          "key": "w",
+          "name": "Worktrees (GitLens)",
+          "type": "command",
+          "command": "gitlens.views.worktrees.focus",
+        },
+      ],
+    },
+  ],
+
+  // Mermaid Chart
+  "mermaid.vscode.dark": "redux-dark",
+  "mermaid.vscode.light": "redux",
+  "mermaidChart.showGenerateDiagramCodeLens": false,
+  "mermaidChart.preCommitSync.enabled": false,
+  "mermaidChart.createDiagramFromStage.enabled": false,
+  "mermaidChart.aiSkills.enabled": false,
+  "mermaidChart.aiSkills.promptOnDetect": false,
+  "mermaidChart.enableTelemetry": false,
+  "markdown-mermaid.lightModeTheme": "vscode",
+  "markdown-mermaid.darkModeTheme": "vscode",
+  "workbench.statusBar.visible": false,
+  "breadcrumbs.enabled": false,
+}

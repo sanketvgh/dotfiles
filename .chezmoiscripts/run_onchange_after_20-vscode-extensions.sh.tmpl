@@ -1,0 +1,12 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+# zen hash: {{ includeTemplate "vscode/zen/extensions.txt" . | sha256sum }}
+set -eu
+
+installed=$(code --profile {{ .vscodeProfile | quote }} --list-extensions 2>/dev/null | tr '[:upper:]' '[:lower:]')
+printf '%s\n' '{{ includeTemplate "vscode/zen/extensions.txt" . }}' | while IFS= read -r id; do
+  [ -n "$id" ] || continue
+  lower=$(printf '%s' "$id" | tr '[:upper:]' '[:lower:]')
+  printf '%s\n' "$installed" | grep -qx "$lower" || code --profile {{ .vscodeProfile | quote }} --install-extension "$id"
+done
+{{ end -}}

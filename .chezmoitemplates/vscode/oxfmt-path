@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "windows" -}}
+"${userHome}\\AppData\\Local\\pnpm\\bin\\oxfmt.cmd"
+{{- else -}}
+"${userHome}/.local/share/pnpm/bin/oxfmt"
+{{- end -}}

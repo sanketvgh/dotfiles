@@ -1,0 +1,38 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+# The Zen profile lives in a folder with a per-machine random ID, so it is
+# found through VS Code's storage.json instead of a fixed chezmoi target.
+# settings hash:    {{ includeTemplate "vscode/zen/settings.json" . | sha256sum }}
+# keybindings hash: {{ includeTemplate "vscode/zen/keybindings.json" . | sha256sum }}
+set -eu
+
+user="${XDG_CONFIG_HOME:-$HOME/.config}/Code/User"
+storage="$user/globalStorage/storage.json"
+if [ ! -f "$storage" ]; then
+  echo "VS Code has not been started on this machine yet. Start it once, then run chezmoi apply again." >&2
+  exit 1
+fi
+
+location=$(python3 -c '
+import json, sys
+profiles = json.load(open(sys.argv[1])).get("userDataProfiles", [])
+print(next((p["location"] for p in profiles if p.get("name") == {{ .vscodeProfile | quote }}), ""))
+' "$storage")
+if [ -z "$location" ]; then
+  echo "VS Code profile {{ .vscodeProfile | squote }} not found. Create it (Profiles > New Profile > {{ .vscodeProfile }}), then run chezmoi apply again." >&2
+  exit 1
+fi
+
+dir="$user/profiles/$location"
+mkdir -p "$dir"
+
+cat > "$dir/settings.json" <<'CHEZMOI_EOF'
+{{ includeTemplate "vscode/zen/settings.json" . }}
+CHEZMOI_EOF
+
+cat > "$dir/keybindings.json" <<'CHEZMOI_EOF'
+{{ includeTemplate "vscode/zen/keybindings.json" . }}
+CHEZMOI_EOF
+
+echo "VS Code profile {{ .vscodeProfile }} updated: $dir"
+{{ end -}}

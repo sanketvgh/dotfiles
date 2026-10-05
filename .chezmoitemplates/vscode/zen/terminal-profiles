@@ -1,0 +1,41 @@
+{{- $agents := list
+  (list "Claude"            "claude --permission-mode auto"                        "sparkle"        "terminal.ansiYellow")
+  (list "Claude · Continue" "claude --permission-mode auto --continue"             "history"        "terminal.ansiYellow")
+  (list "Claude · Resume"   "claude --permission-mode auto --resume"               "list-unordered" "terminal.ansiYellow")
+  (list "Claude · Plan"     "claude --permission-mode plan"                        "checklist"      "terminal.ansiYellow")
+  (list "Claude · Worktree" "claude --permission-mode auto --worktree"             "git-branch"     "terminal.ansiYellow")
+  (list "Codex"             "codex --no-daemon --no-alt-screen"                    "hubot"          "terminal.ansiCyan")
+  (list "Codex · Continue"  "codex resume --last --no-daemon --no-alt-screen"      "history"        "terminal.ansiCyan")
+  (list "Codex · Resume"    "codex resume --no-daemon --no-alt-screen"             "list-unordered" "terminal.ansiCyan")
+  (list "Codex · Worktree"  "codex --worktree --no-daemon --no-alt-screen"         "git-branch"     "terminal.ansiCyan")
+-}}
+{{- $windows := eq .chezmoi.os "windows" -}}
+  "terminal.integrated.defaultProfile.{{ if $windows }}windows": "PowerShell"{{ else }}linux": "zsh"{{ end }},
+  "terminal.integrated.profiles.{{ if $windows }}windows{{ else }}linux{{ end }}": {
+{{- range $agents }}
+    {{ index . 0 | toJson }}: {
+{{- if $windows }}
+      "path": "pwsh.exe",
+      "args": ["-NoLogo", "-NoExit", "-Command", {{ index . 1 | toJson }}],
+{{- else }}
+      "path": "zsh",
+      "args": ["-l", "-i", "-c", {{ printf "%s; exec zsh -l" (index . 1) | toJson }}],
+{{- end }}
+      "icon": {{ index . 2 | toJson }},
+      "color": {{ index . 3 | toJson }},
+      "overrideName": true
+    },
+{{- end }}
+    "Shell": {
+{{- if $windows }}
+      "path": "pwsh.exe",
+      "args": ["-NoLogo"],
+      "icon": "terminal-powershell",
+{{- else }}
+      "path": "zsh",
+      "args": ["-l"],
+      "icon": "terminal-bash",
+{{- end }}
+      "overrideName": true
+    }
+  },

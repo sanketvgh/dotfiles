@@ -1,0 +1,15 @@
+{{ if eq .chezmoi.os "windows" -}}
+# zen hash: {{ includeTemplate "vscode/zen/extensions.txt" . | sha256sum }}
+$ErrorActionPreference = 'Stop'
+
+$extensions = @'
+{{ includeTemplate "vscode/zen/extensions.txt" . }}
+'@
+
+$installed = code --profile {{ .vscodeProfile | quote }} --list-extensions 2>$null | ForEach-Object { $_.ToLower() }
+foreach ($id in ($extensions -split "`r?`n" | Where-Object { $_.Trim() })) {
+    if ($installed -notcontains $id.Trim().ToLower()) {
+        code --profile {{ .vscodeProfile | quote }} --install-extension $id.Trim() 2>&1 | Where-Object { $_ -notmatch 'DEP0169|trace-deprecation' }
+    }
+}
+{{ end -}}

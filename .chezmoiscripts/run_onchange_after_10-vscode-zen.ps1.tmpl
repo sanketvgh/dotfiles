@@ -1,0 +1,33 @@
+{{ if eq .chezmoi.os "windows" -}}
+# The Zen profile lives in a folder with a per-machine random ID, so it is
+# found through VS Code's storage.json instead of a fixed chezmoi target.
+# settings hash:    {{ includeTemplate "vscode/zen/settings.json" . | sha256sum }}
+# keybindings hash: {{ includeTemplate "vscode/zen/keybindings.json" . | sha256sum }}
+$ErrorActionPreference = 'Stop'
+
+$user = Join-Path $env:APPDATA 'Code\User'
+$storageFile = Join-Path $user 'globalStorage\storage.json'
+if (-not (Test-Path $storageFile)) {
+    Write-Error 'VS Code has not been started on this machine yet. Start it once, then run chezmoi apply again.'
+}
+$zen = (Get-Content $storageFile -Raw | ConvertFrom-Json).userDataProfiles | Where-Object name -eq {{ .vscodeProfile | squote }}
+if (-not $zen) {
+    Write-Error "VS Code profile {{ .vscodeProfile | squote }} not found. Create it (Profiles > New Profile > {{ .vscodeProfile }}), then run chezmoi apply again."
+}
+
+$dir = Join-Path $user "profiles\$($zen.location)"
+New-Item -ItemType Directory -Force $dir | Out-Null
+$utf8 = [Text.UTF8Encoding]::new($false)
+
+$settings = @'
+{{ includeTemplate "vscode/zen/settings.json" . }}
+'@
+[IO.File]::WriteAllText((Join-Path $dir 'settings.json'), $settings, $utf8)
+
+$keybindings = @'
+{{ includeTemplate "vscode/zen/keybindings.json" . }}
+'@
+[IO.File]::WriteAllText((Join-Path $dir 'keybindings.json'), $keybindings, $utf8)
+
+Write-Host "VS Code profile {{ .vscodeProfile }} updated: $dir"
+{{ end -}}

@@ -2,6 +2,8 @@
 
 Managed with [chezmoi](https://www.chezmoi.io). Holds the VS Code **Zen** profile and its markdownlint config, for Windows and Linux (zsh).
 
+![VS Code Zen profile: code on the left, Claude Code on the right](docs/zen.png)
+
 ## What is managed
 
 | Path | Purpose |

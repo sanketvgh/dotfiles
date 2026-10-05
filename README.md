@@ -1,6 +1,6 @@
 # dotfiles
 
-Managed with [chezmoi](https://www.chezmoi.io). Holds the VS Code **Zen** profile, for Windows and Linux (zsh).
+Managed with [chezmoi](https://www.chezmoi.io). Holds the VS Code **Zen** profile and its markdownlint config, for Windows and Linux (zsh).
 
 ## What is managed
 
@@ -12,6 +12,7 @@ Managed with [chezmoi](https://www.chezmoi.io). Holds the VS Code **Zen** profil
 | `.chezmoitemplates/vscode/zen/keybindings.json` | Zen keybindings |
 | `.chezmoitemplates/vscode/zen/extensions.txt` | Zen extensions |
 | `.chezmoidata.toml` | Name of the VS Code profile to apply to (`vscodeProfile`) |
+| `dot_markdownlint.json` | `~/.markdownlint.json`, used by the Zen markdownlint settings |
 | `.chezmoiscripts/*-vscode-zen.*` | Writes settings and keybindings into the Zen profile folder |
 | `.chezmoiscripts/*-vscode-extensions.*` | Installs missing Zen extensions |
 
@@ -77,8 +78,9 @@ chezmoi apply
 
 ### What `chezmoi apply` does
 
-1. Finds the Zen profile folder through `storage.json` and writes `settings.json` and `keybindings.json` into it.
-2. Installs any Zen extensions that are missing.
+1. Writes `~/.markdownlint.json`.
+2. Finds the Zen profile folder through `storage.json` and writes `settings.json` and `keybindings.json` into it.
+3. Installs any Zen extensions that are missing.
 
 If VS Code has never been started, or the Zen profile does not exist yet, the script stops with a message explaining what to do. Run `chezmoi apply` again after fixing it.
 
